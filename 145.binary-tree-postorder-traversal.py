@@ -11,47 +11,52 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-from typing import Optional, List
 
-# TreeNode は既に定義されていると仮定
+######
+## 再帰法
+#####
+
+# class Solution:
+#     def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+#         res = []
+        
+#         def dfs(node):
+#             if not node:
+#                 return
+#             dfs(node.left)    # 左
+#             dfs(node.right)   # 右
+#             res.append(node.val) # 根
+            
+#         dfs(root)
+#         return res
+
+#######
+### 非再帰
+#######
 
 class Solution:
     def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        result = []
-
-        def traverse(node):
-            if not node:
-                return 
-            traverse(node.left)
-            traverse(node.right)
-            result.append(node.val)
-
-            return
+        if not root:
+            return []
         
-        traverse(root)
+        stack = [root]
+        res = []
         
-        return
-
-
-# class Solution:
-    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        result = []
+        # ステップ1: 「根 -> 右 -> 左」の順で取り出す
+        while stack:
+            node = stack.pop()
+            res.append(node.val)
+            
+            # Preorderとは逆に、左を先に積んで右を後に積む 
+            # -> 取り出すときは「右 -> 左」の順になる
+            if node.left:
+                stack.append(node.left)
+            if node.right:
+                stack.append(node.right)
         
-        def traverse(node: Optional[TreeNode]):
-            # ベースケース: ノードが None なら終了
-            if not node:
-                return
-            
-            # 1. 左部分木を再帰的に走査
-            traverse(node.left)
-            
-            # 2. 右部分木を再帰的に走査
-            traverse(node.right)
-            
-            # 3. 根の値を記録 (最後に訪問)
-            result.append(node.val)
+        # ステップ2: 最後にひっくり返す (根右左 -> 左右根)
+        return res[::-1]
 
-        traverse(root)
-        return result
+
 # @lc code=end
 

@@ -21,25 +21,24 @@ class TreeNode:
         self.right = right
 
 class Solution:
+    # inorderは左ルート右
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        res = []
+        stack = []
+        curr = root
+        while curr or stack:
 
-        result = []
-        def traverse(node):
+            while curr:
+                stack.append(curr)
+                curr = curr.left
+            # 最後の左を入れる
+            curr = stack.pop()
+            res.append(curr.val)
             
-            if not node:
-                return
+            curr = curr.right
 
-            traverse(node.left)
-            result.append(node.val)
-            traverse(node.right)
-            return
-
-        traverse(root)
-
-        return result
-
-
-
+        return res  
+                        
 
 
 

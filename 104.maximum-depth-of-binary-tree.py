@@ -23,13 +23,10 @@ class Solution:
         if not root:
             return 0
         
-        leftDepth = self.maxDepth(root.left)
-        rightDepth = self.maxDepth(root.right)
+        leftHeight = self.maxDepth(root.left)
+        rightHeight = self.maxDepth(root.right)
 
-        return max(leftDepth, rightDepth) + 1
-
-
-
+        return max(leftHeight, rightHeight) + 1
 
 
 
@@ -39,14 +36,34 @@ class Solution:
 
 
 # class Solution:
-    def maxDepth(self, root: TreeNode) -> int:
-        if root == None:
-            return 0
+#     def maxDepth(self, root: TreeNode) -> int:
+#         if not root:
+#             return 0
         
-        left_depth = self.maxDepth(root.left)
-        right_depth = self.maxDepth(root.right) 
+#         leftDepth = self.maxDepth(root.left)
+#         rightDepth = self.maxDepth(root.right)
 
-        return max(left_depth,right_depth) + 1
+#         return max(leftDepth, rightDepth) + 1
+
+
+
+
+
+
+
+
+
+
+
+# # class Solution:
+#     def maxDepth(self, root: TreeNode) -> int:
+#         if root == None:
+#             return 0
+        
+#         left_depth = self.maxDepth(root.left)
+#         right_depth = self.maxDepth(root.right) 
+
+#         return max(left_depth,right_depth) + 1
 
 # class Solution:
 #     def maxDepth(self, root: TreeNode) -> int:

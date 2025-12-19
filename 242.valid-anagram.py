@@ -9,21 +9,45 @@ class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         if len(s) != len(t):
             return False
-        map_s = {}
+        
+        charCount = {}
 
         for char in s:
-            map_s[char] = map_s.get(char, 0) + 1
+            charCount[char] = charCount.get(char, 0) + 1
         
         for char in t:
-            if not char in map_s.keys():
+            if not char in charCount.keys():
                 return False
-            map_s[char] -= 1
+            charCount[char] -= 1
         
-        for cnt in map_s.values():
+        for cnt in charCount.values():
             if cnt != 0:
                 return False
-        
+
         return True
+
+
+
+
+# class Solution:
+#     def isAnagram(self, s: str, t: str) -> bool:
+#         if len(s) != len(t):
+#             return False
+#         map_s = {}
+
+#         for char in s:
+#             map_s[char] = map_s.get(char, 0) + 1
+        
+#         for char in t:
+#             if not char in map_s.keys():
+#                 return False
+#             map_s[char] -= 1
+        
+#         for cnt in map_s.values():
+#             if cnt != 0:
+#                 return False
+        
+#         return True
 
 
 

@@ -11,33 +11,124 @@ import sys
 # 再帰制限の引き上げはそのまま残しておきましょう
 sys.setrecursionlimit(2000) 
 
+from collections import deque
+from typing import List
+
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
         R, C = len(grid), len(grid[0])
         cnt = 0
-        visited = [[False] * C for _ in range(R)]
+        visited = set()
 
-        def dfs(r, c):
-            if not (0 <= r < R and 0 <= c < C):
-                return
-            if grid[r][c] == "0":
-                return 
-            if visited[r][c]:
-                return
-            
-            visited[r][c] = True
+        def bfs(r, c):
+            # キューを用意して開始地点を入れる
+            queue = deque([(r, c)])
+            visited.add((r, c))
 
-            for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
-                dfs(r + dr, c + dc)
+            while queue:
+                curr_r, curr_c = queue.popleft()
 
+                # 上下左右を探索
+                for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+                    nr, nc = curr_r + dr, curr_c + dc
+                    
+                    # 1. 範囲内か？ 2. 陸地か？ 3. 未訪問か？
+                    if (0 <= nr < R and 0 <= nc < C and 
+                        grid[nr][nc] == "1" and 
+                        (nr, nc) not in visited):
+                        
+                        # 重要：キューに入れる「直前」にvisitedに追加する（重複防止）
+                        visited.add((nr, nc))
+                        queue.append((nr, nc))
 
         for r in range(R):
             for c in range(C):
-                if grid[r][c] == "1" and not visited[r][c]:
+                if grid[r][c] == "1" and (r, c) not in visited:
                     cnt += 1
-                    dfs(r, c)
+                    bfs(r, c)
 
         return cnt
+    
+
+
+
+
+# class Solution:
+#     def numIslands(self, grid: List[List[str]]) -> int:
+#         R, C = len(grid), len(grid[0])
+#         cnt = 0
+#         visited = set()
+
+#         def dfs(r, c):
+#             if not (0 <= r < R and 0 <= c < C):
+#                 return
+#             if grid[r][c] == "0":
+#                 return
+#             if (r, c) in visited:
+#                 return
+            
+#             visited.add((r,c))
+
+#             for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+#                 dfs(r + dr, c + dc)
+
+
+#         for r in range(R):
+#             for c in range(C):
+#                 if grid[r][c] == "1" and not (r, c) in visited:
+#                     cnt += 1
+#                     dfs(r, c)
+
+#         return cnt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# class Solution:
+#     def numIslands(self, grid: List[List[str]]) -> int:
+#         R, C = len(grid), len(grid[0])
+#         cnt = 0
+#         visited = [[False] * C for _ in range(R)]
+
+#         def dfs(r, c):
+#             if not (0 <= r < R and 0 <= c < C):
+#                 return
+#             if grid[r][c] == "0":
+#                 return 
+#             if visited[r][c]:
+#                 return
+            
+#             visited[r][c] = True
+
+#             for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+#                 dfs(r + dr, c + dc)
+
+
+#         for r in range(R):
+#             for c in range(C):
+#                 if grid[r][c] == "1" and not visited[r][c]:
+#                     cnt += 1
+#                     dfs(r, c)
+
+#         return cnt
             
 
 

@@ -10,30 +10,75 @@ class Solution:
     def floodFill(self, image: List[List[int]], sr: int, sc: int, newColor: int) -> List[List[int]]:
         R, C = len(image), len(image[0])
         initialColor = image[sr][sc]
-        visited = [[False] * C for _ in range(R)]
-        #if initialColor == newColor:
-        #    return image
-        def dfs(r, c):
-            
-            # 終了条件1: キャンバスの外
-            if not (0 <= r < R and 0 <= c < C):
-                return                        
-            # 終了条件2: 色が違う領域
-            if image[r][c] != initialColor:
-                return            
-            # 終了条件3: 訪問済み
-            if visited[r][c]:
-                return 
-            
-            visited[r][c] = True
-            image[r][c] = newColor
+        
+        if initialColor == newColor:
+            return image
 
-            for dr, dc in [(-1,0), (1, 0), (0, -1), (0, 1)]:
+        def dfs(r, c):
+            if not (0 <= r < R and 0 <= c < C):
+                return
+            if not image[r][c] == initialColor:
+                return
+            
+            image[r][c] = newColor
+            
+            for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
                 dfs(r + dr, c + dc)
 
         dfs(sr, sc)
 
         return image
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# class Solution:
+#     def floodFill(self, image: List[List[int]], sr: int, sc: int, newColor: int) -> List[List[int]]:
+#         R, C = len(image), len(image[0])
+#         initialColor = image[sr][sc]
+#         visited = [[False] * C for _ in range(R)]
+#         #if initialColor == newColor:
+#         #    return image
+#         def dfs(r, c):
+            
+#             # 終了条件1: キャンバスの外
+#             if not (0 <= r < R and 0 <= c < C):
+#                 return                        
+#             # 終了条件2: 色が違う領域
+#             if image[r][c] != initialColor:
+#                 return            
+#             # 終了条件3: 訪問済み
+#             if visited[r][c]:
+#                 return 
+            
+#             visited[r][c] = True
+#             image[r][c] = newColor
+
+#             for dr, dc in [(-1,0), (1, 0), (0, -1), (0, 1)]:
+#                 dfs(r + dr, c + dc)
+
+#         dfs(sr, sc)
+
+#         return image
 
 
 

@@ -13,16 +13,34 @@ class ListNode:
 
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        prevNode = None
-        currNode = head
+        prev_node = None
+        curr_node = head
 
-        while currNode:
-            nextNode = currNode.next
-            currNode.next = prevNode
-            prevNode = currNode
-            currNode = nextNode
+        while curr_node:
+            next_node = curr_node.next
+            curr_node.next = prev_node
+            prev_node = curr_node
+            curr_node = next_node
 
-        return prevNode
+        return prev_node
+
+
+
+
+
+
+# class Solution:
+#     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+#         prevNode = None
+#         currNode = head
+
+#         while currNode:
+#             nextNode = currNode.next
+#             currNode.next = prevNode
+#             prevNode = currNode
+#             currNode = nextNode
+
+#         return prevNode
 
 
 
